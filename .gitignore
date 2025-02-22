@@ -21,11 +21,3 @@ dist/
 .idea/
 *.swp
 .awcache
-
-# Generated source-code #
-src/**/*.js
-src/**/*.js.map
-test/**/*.js
-test/**/*.js.map
-coverage/
-!test/preprocessor.js

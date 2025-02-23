@@ -41,6 +41,7 @@ export class AuthMiddleware {
             req.body.auth = username;
             next();
         } catch (error) {
+            console.error("[AUTHENTICATION MIDDLEWARE]: END - ERROR", error)
             return res.status(403).json({ success: false, message: "Forbidden: Invalid token" });
         }
     }

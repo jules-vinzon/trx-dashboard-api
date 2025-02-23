@@ -9,7 +9,10 @@ export class UsersModel {
     async addUser(userData) {
         try {
 
+            /* eslint-disable no-unused-vars */
             const { auth, ...sanitizedBody } = userData; 
+            /* eslint-enable no-unused-vars */
+            
             sanitizedBody.created_at = new Date();
             const result = await this.collection.insertOne(sanitizedBody);
             return {

@@ -18,7 +18,10 @@ export class UsersMiddleware {
 
     async addUserMiddleware(req, res, next) {
 
-        const { password, auth, ...sanitizedBody } = req.body; 
+        /* eslint-disable no-unused-vars */
+        const { password, auth, ...sanitizedBody } = req.body;
+        /* eslint-enable no-unused-vars */
+
         this.logsModel.addLogs(sanitizedBody, 'request', req.body.auth, 'ADD USER')
         
         const userData = await this.usersModel.fetchUserByUsername(req.body.username);

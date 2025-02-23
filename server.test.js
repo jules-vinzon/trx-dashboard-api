@@ -1,8 +1,7 @@
 import request from 'supertest';
 import app from './server.js';
 import { generateRandomString } from './src/utils/stringUtils.js';
-import { Double } from 'mongodb';
-
+import { describe, it, expect } from '@jest/globals';
 
 describe('POST /api/transactions/topup', () => {
     it('should return 200 and process the request successfully', async () => {

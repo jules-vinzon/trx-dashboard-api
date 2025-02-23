@@ -10,13 +10,13 @@ const transactionsMiddleware = new TransactionsMiddleware();
 const authMiddleware = new AuthMiddleware();
 
 router.post('/topup', 
-    authMiddleware.authenticateMiddelware.bind(authMiddleware),
+    authMiddleware.authenticateMiddleware.bind(authMiddleware),
     transactionsMiddleware.topupMiddleware.bind(transactionsMiddleware), 
     transactionsController.topupBalance.bind(transactionsController)
 );
 
 router.get('/fetch/:id', 
-    authMiddleware.authenticateMiddelware.bind(authMiddleware),
+    authMiddleware.authenticateMiddleware.bind(authMiddleware),
     transactionsController.fetchTransactions.bind(transactionsController)
 );
 

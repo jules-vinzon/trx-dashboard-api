@@ -15,10 +15,11 @@ export class AuthMiddleware {
         res.status(401).send(finalResp);
     }
 
-    async authenticateMiddelware(req, res, next) {
+    async authenticateMiddleware(req, res, next) {
         try {
             const authHeader = req.headers.authorization;
             const token = authHeader && authHeader.split(" ")[1]; 
+            console.log('CHECK TOKEN', token);
         
             if (!token) {
                 console.log('[AUTHENTICATION MIDDLEWARE]: NO TOKEN PROVIDED!')
@@ -41,6 +42,7 @@ export class AuthMiddleware {
             req.body.auth = username;
             next();
         } catch (error) {
+            console.error("[AUTHENTICATION MIDDLEWARE]: END - ERROR", error)
             return res.status(403).json({ success: false, message: "Forbidden: Invalid token" });
         }
     }

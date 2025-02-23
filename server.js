@@ -7,7 +7,7 @@ import connectDB from './src/configs/mongodb.js';
 import { cronJob } from "./src/configs/cronJob.js";
 
 const app = express();
-const port = process.env.PORT;
+const port = 80;
 
 app.use(json());
 app.use(morgan("dev"));

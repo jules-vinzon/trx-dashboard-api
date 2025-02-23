@@ -10,7 +10,7 @@ const usersMiddleware = new UsersMiddleware();
 const authMiddleware = new AuthMiddleware();
 
 router.post('/add', 
-    authMiddleware.authenticateMiddelware.bind(authMiddleware),
+    authMiddleware.authenticateMiddleware.bind(authMiddleware),
     usersMiddleware.addUserMiddleware.bind(usersMiddleware), 
     usersController.addUsers.bind(usersController)
 );

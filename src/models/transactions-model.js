@@ -36,7 +36,7 @@ export class TransactionsModel {
             return {
                 success: true,
                 user_id: userWalletData.data._id,
-                balance: transactionsData.current_balance
+                balance: transactionsData.current_balance.toString()
             };
 
         } catch (error) {

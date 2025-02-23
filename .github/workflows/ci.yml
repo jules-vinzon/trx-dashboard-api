@@ -1,0 +1,49 @@
+name: trx-dashboard-api actions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Job to install dependencies, lint, test, and generate coverage reports
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Set up Node.js (use your Node.js version)
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '21' # or the version you need
+
+    # Install dependencies
+    - name: Install dependencies
+      run: |
+        npm install
+
+    # Run Linting (using ESLint for Node.js)
+    - name: Run Linting
+      run: |
+        npm install eslint --save-dev
+        npx eslint . --ext .js,.ts
+
+    # Run Tests (Unit, Integration, etc.)
+    - name: Run Tests
+      run: |
+        npm install --save-dev jest
+        npm test -- --coverage # Use `--coverage` to generate a coverage report
+
+    # Upload Coverage Report
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: ./coverage/

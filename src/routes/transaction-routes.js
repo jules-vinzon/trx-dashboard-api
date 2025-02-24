@@ -15,9 +15,6 @@ router.post('/topup',
     transactionsController.topupBalance.bind(transactionsController)
 );
 
-router.get('/fetch/:id', 
-    authMiddleware.authenticateMiddleware.bind(authMiddleware),
-    transactionsController.fetchTransactions.bind(transactionsController)
-);
+router.get('/fetch/:id',  transactionsController.fetchTransactions.bind(transactionsController));
 
 export default router;

@@ -23,12 +23,32 @@ export class UsersMiddleware {
         /* eslint-enable no-unused-vars */
 
         this.logsModel.addLogs(sanitizedBody, 'request', req.body.auth, 'ADD USER')
-        
-        const userData = await this.usersModel.fetchUserByUsername(req.body.username);
 
-        if (userData.success) {
-            console.log('[ADD USER MIDDLEWARE]: USERNAME ALREADY EXISTS!')
-            return this.errorResponse('Username already exists!', res);
+        if (!req.body.username || req.body.username === undefined) {
+            console.log('[ADD USER MIDDLEWARE]: USERNAME IS MISSING!');
+            return this.errorResponse('Username is missing', res);
+        } else {
+            const userData = await this.usersModel.fetchUserByUsername(req.body.username);
+
+            if (userData.success) {
+                console.log('[ADD USER MIDDLEWARE]: USERNAME ALREADY EXISTS!')
+                return this.errorResponse('Username already exists!', res);
+            }
+        }
+
+        if (!req.body.password || req.body.password === undefined) {
+            console.log('[ADD USER MIDDLEWARE]: PASSWORD IS MISSING!');
+            return this.errorResponse('Password is missing', res);
+        }
+
+        if (!req.body.first_name || req.body.first_name === undefined) {
+            console.log('[ADD USER MIDDLEWARE]: FIRST NAME IS MISSING!');
+            return this.errorResponse('First Name is missing', res);
+        }
+
+        if (!req.body.last_name || req.body.last_name === undefined) {
+            console.log('[ADD USER MIDDLEWARE]: LAST NAME IS MISSING!');
+            return this.errorResponse('Last Name is missing', res);
         }
 
         next();

@@ -24,7 +24,7 @@ export class TransactionsModel {
                 request_id: data.request_id,
                 requestor: data.auth,
                 balance_before: currentBalance,
-                current_balance: Number.parseFloat(data.amount) + Number.parseFloat(currentBalance),
+                balance_after: Number.parseFloat(data.amount) + Number.parseFloat(currentBalance),
                 status: 'SUCCESS',
                 created_at: new Date(),
                 updated_at: new Date()
@@ -36,7 +36,8 @@ export class TransactionsModel {
             return {
                 success: true,
                 user_id: userWalletData.data._id,
-                balance: transactionsData.current_balance.toString()
+                balance: transactionsData.balance_after,
+                data: transactionsData
             };
 
         } catch (error) {
@@ -62,7 +63,10 @@ export class TransactionsModel {
     async fetchByRequestor(requestor) {
         try {
             console.log('[TRANSACTIONS MODEL]: CHECK REQUESTOR', requestor)
-            const result = await this.collection.find({ requestor }).toArray();
+            const result = await this.collection
+                .find({ requestor })
+                .sort({ created_at: -1 })
+                .toArray();
             if (!result) {
                 return { success: false, message: "Transactions not found" };
             }

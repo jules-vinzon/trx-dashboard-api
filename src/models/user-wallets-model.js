@@ -15,7 +15,7 @@ export class UserWalletsModel {
 
             const walletData = {
                 user_id: userId,
-                balance: '0.00',
+                balance: 0.00,
                 wallet_id: walletId,
                 created_at: new Date(),
                 updated_at: new Date()
@@ -34,7 +34,7 @@ export class UserWalletsModel {
         try {    
             console.log('[UPDATE WALLET]: CHECK DATA', data);
 
-            this.collection.updateOne({ user_id: data.user_id }, { $set: { balance: data.balance.toString(), updated_at: new Date()}}, (err, result) => {
+            this.collection.updateOne({ user_id: data.user_id }, { $set: { balance: data.balance, updated_at: new Date()}}, (err, result) => {
                 console.log('[UPDATE WALLET] CHECK UPDATE RECORD ERROR', err);
                 console.log('[UPDATE WALLET] CHECK UPDATE RECORD RESULT', result);
             });

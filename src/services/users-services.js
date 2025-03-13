@@ -110,6 +110,7 @@ export class UsersService {
             const token = generateToken(decryptedString.username);
 
             await this.userTokensModel.addToken(token, requestBody.request_id, userData.user);
+            delete userData.user.password
 
             return  {
                 success: true,

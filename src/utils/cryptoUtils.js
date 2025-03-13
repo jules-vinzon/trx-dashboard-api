@@ -73,6 +73,7 @@ export const validateJwtToken = (token) => {
         const decoded = jwt.verify(token, secretKey);
         return decoded.exp * 1000 > Date.now();
     } catch (error) {
+        console.error("JWT Token Validation Error:", error);
         return false;
     }
 }
